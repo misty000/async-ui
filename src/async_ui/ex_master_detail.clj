@@ -85,6 +85,7 @@
 
 (defn item-manager-view
   [data]
+  (println "----" "item-manager-view")
   (let [spec
         (window "Item Manager"
                 :content

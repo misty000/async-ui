@@ -9,16 +9,13 @@
 
 (defn table-view
   [data]
-  (-> (v/make-view
-       "table-demo"
-       (window "Table Demo" :content
-               (panel "Content" :lygeneral "fill" 
-                      :components
-                      [(table "Contacts"
-                              :columns
-                              [(column "Name")
-                               (column "Street")
-                               (column "City")])])))
+  (-> (v/make-view "table-demo"
+        (window "Table Demo" :content
+                (panel "Content" :lygeneral "fill" :components
+                       [(table "Contacts" :columns
+                               [(column "Name")
+                                (column "Street")
+                                (column "City")])])))
       (assoc :data data
              :mapping (v/make-mapping :contacts ["Contacts" :items]
                                       :selected ["Contacts" :selection]))))
@@ -30,7 +27,8 @@
 
 
 (defn start! []
+  (v/run-tk (javafx/make-toolkit))
   (v/run-view #'table-view
               #'table-view-handler
               {:contacts (vec (repeat 10 {:name "foo" :street "bar" :city "baz"}))
-               :selected [0]}))
+               :selected [4]}))
